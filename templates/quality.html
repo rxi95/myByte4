@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>Quality of This Data</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/theme.css" rel="stylesheet">
+  </head>
+
+  <body role="document">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="about">About This Data Set</a></li>
+	    <li  class="active"><a href="quality">Data Quality</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+	<h1>Quality: About This Data Set</h1>
+        
+      </div>
+
+    
+      <div class="page-header">
+	<h2>Data quality</h2>
+	<p>The dataset was not complete as many parameters were missing.</p>
+	<p>
+	For many samples, the activity_type values were missing. 
+	For all cases ,the label values of location table are missing.
+	</p>
+	<p>The accuracy of collected data is not high as expected.</p>
+	<p>The accuracy value of location table is very high (highest values over 1000m). 
+	The confidence values of activity table are all 2 (range 1-100) thus the confidence of activity values can't be determined.
+	</p>
+    <p>To assure the quality of data, although what can be done is limited, here's what I did when processing the datesets: </p>
+    <p>Activity table: </p>
+    <p>Lines where activities = “” were dropped; 
+    Column device_id is dropped since only one device was used;
+    Column confidence is dropped since all confidence is 2. There might be a bug in the APP.</p>
+    <p>Locations table:</p>
+    <p>Rows with accuracy > 1000 (m) were dropped;
+       Column device_id is dropped since only one device was used;
+       Column double_bearing is dropped since all values are -1;
+       Column label is dropped since all values are NULL;
+       Column provider is dropped since all values are gps.</p>     
+    <p>Overall, although the many parts of dataset are inconsistent and imcomplete, the final visualization was still able to provide some insights.</p>
+      </div>
+      
+      <div class="page-header">
+	<h2>Visualization design choice</h2>
+	<p>
+	For visualization, I decided to left join activity table to locations table on timestamp so that each dot represent a location where I have been to and what my activity is at that spot.
+	The color of the dot was set based on the activity type so that the viewers can visualize the activity at each location without clicking into it.
+	Tooltip was set to contain detailed information for each dot including datatime, activity type, latitude, longitude and speed.
+	An open source WMS <a href = "http://ows.terrestris.de/dienste.html">terrestris</a> was set as the background of map so that viewers can better visualize the locations I have been to.
+	</p>
+	
+      </div>
+
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+  </body>
+</html>
